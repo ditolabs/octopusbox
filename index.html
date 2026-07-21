@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Octopus Useless Box v2</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Canvas tempat semua physics, IK, dan animasi dirender pada 60 FPS -->
+        <canvas id="game-canvas"></canvas>
+        
+        <!-- Lapisan UI untuk elemen non-gameplay -->
+        <div id="ui-layer">
+            <button id="theme-toggle" aria-label="Toggle Dark Mode">🌗</button>
+            <div id="loading-screen">Memuat Sistem...</div>
+        </div>
+    </div>
+
+    <!-- Menggunakan ES Modules agar arsitektur file rapi dan modular -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
