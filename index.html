@@ -18,6 +18,29 @@
         </div>
     </div>
 
+    <!-- Diagnostik: kalau boot gagal (path salah, 404, error runtime),
+         tampilkan pesannya langsung di layar alih-alih diam di "Memuat Sistem..." -->
+    <script>
+        window.__bootError = null;
+        window.addEventListener('error', function (e) {
+            window.__bootError = (e.message || 'Unknown error') +
+                (e.filename ? ' @ ' + e.filename + ':' + e.lineno : '');
+        });
+        window.addEventListener('unhandledrejection', function (e) {
+            var reason = e.reason && e.reason.message ? e.reason.message : e.reason;
+            window.__bootError = 'Promise rejection: ' + reason;
+        });
+        setTimeout(function () {
+            var ls = document.getElementById('loading-screen');
+            if (ls && !ls.classList.contains('hidden')) {
+                ls.innerHTML = 'Gagal memuat game.<br><small>' +
+                    (window.__bootError || 'Kemungkinan js/main.js gagal di-load (404) — cek struktur folder di repo GitHub kamu.') +
+                    '</small>';
+                ls.style.color = '#e85d4c';
+            }
+        }, 4000);
+    </script>
+
     <!-- Menggunakan ES Modules agar arsitektur file rapi dan modular -->
     <script type="module" src="js/main.js"></script>
 </body>
